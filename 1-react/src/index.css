@@ -17,7 +17,7 @@ body {
     margin-bottom: 10px;
   }
   
-  .square {
+  .cuadrado {
     background: #fff;
     border: 1px solid #999;
     float: left;
@@ -32,11 +32,11 @@ body {
     width: 34px;
   }
   
-  .square:focus {
+  .cuadrado:focus {
     outline: none;
   }
   
-  .kbd-navigation .square:focus {
+  .kbd-navigation .cuadrado:focus {
     background: #ddd;
   }
   
