@@ -38,6 +38,10 @@ class Borde extends React.Component {
 
     handleClick(i) {
         const cuadrados = this.state.cuadrados.slice();
+
+        if(calcularGanador(cuadrados) || cuadrados[i]) {
+            return;
+        }
         cuadrados[i] = this.state.xIsNext ? 'X': 'O';
         this.setState({
             cuadrados: cuadrados,
@@ -55,7 +59,14 @@ class Borde extends React.Component {
     }
 
     render() {
-        const status = "Next player: " + (this.state.xIsNext ? 'X' : 'O');
+        // const status = "Next player: " + (this.state.xIsNext ? 'X' : 'O');
+        const winner = calcularGanador(this.state.cuadrados);
+        let status;
+        if (winner) {
+            status = 'Winer: ' + winner;
+        } else {
+            status = 'Next player: ' + (this.state.xIsNext ? 'X' : 'O');
+        }
 
         return (
         <div>
@@ -96,7 +107,7 @@ class Game extends React.Component {
   }
 }
 
-function calcularGanador(cuadrado) {
+function calcularGanador(cuadrados) {
     const linea = [
         [0, 1, 2],
         [3, 4, 5],
@@ -107,6 +118,13 @@ function calcularGanador(cuadrado) {
         [0, 4, 8],
         [2, 4, 6],
     ];
+    for(let i = 0; i < linea.length; i++) {
+        const [a, b, c] = linea[i];
+        if (cuadrados[a] && cuadrados[a] === cuadrados[b] && cuadrados[a] === cuadrados[c]) {
+            return cuadrados[a];
+        }
+    }
+    return null;
 }
 
 // ========================================
