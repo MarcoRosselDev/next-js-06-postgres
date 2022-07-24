@@ -28,6 +28,7 @@ function Cuadrado(props) {
 }
 
 class Borde extends React.Component {
+    /*
     constructor(props) {
         super(props);
         this.state = {
@@ -35,6 +36,9 @@ class Borde extends React.Component {
             xIsNext: true,
         };
     }
+*/
+
+
 
     handleClick(i) {
         const cuadrados = this.state.cuadrados.slice();
@@ -52,8 +56,8 @@ class Borde extends React.Component {
     renderSquare(i) {
         return (
         <Cuadrado 
-        value={this.state.cuadrados[i]}
-        onClick={() => this.handleClick(i)} //---
+        value={this.props.cuadrados[i]}
+        onClick={() => this.props.onClick(i)} //---
         />
         );
     }
@@ -92,6 +96,17 @@ class Borde extends React.Component {
 }
 
 class Game extends React.Component {
+
+    constructor(props) {
+        super(props);
+        this.state = {
+            history: [{
+                cuadrados: Array(9).fill(null),
+            }],
+            xIsNext: true,
+        };
+    }
+
     render() {
     return (
         <div className="game">
