@@ -28,30 +28,6 @@ function Cuadrado(props) {
 }
 
 class Borde extends React.Component {
-    /*
-    constructor(props) {
-        super(props);
-        this.state = {
-            cuadrados: Array(9).fill(null),
-            xIsNext: true,
-        };
-    }
-*/
-
-
-
-    handleClick(i) {
-        const cuadrados = this.state.cuadrados.slice();
-
-        if(calcularGanador(cuadrados) || cuadrados[i]) {
-            return;
-        }
-        cuadrados[i] = this.state.xIsNext ? 'X': 'O';
-        this.setState({
-            cuadrados: cuadrados,
-            xIsNext: !this.state.xIsNext,
-        });
-    }
 
     renderSquare(i) {
         return (
@@ -62,19 +38,29 @@ class Borde extends React.Component {
         );
     }
 
+    /*
+    constructor(props) {
+        super(props);
+        this.state = {
+            cuadrados: Array(9).fill(null),
+            xIsNext: true,
+        };
+    }
+*/
+
     render() {
         // const status = "Next player: " + (this.state.xIsNext ? 'X' : 'O');
-        const winner = calcularGanador(this.state.cuadrados);
+/*      const winner = calcularGanador(this.state.cuadrados);
         let status;
         if (winner) {
             status = 'Winer: ' + winner;
         } else {
             status = 'Next player: ' + (this.state.xIsNext ? 'X' : 'O');
-        }
+        }*/
 
         return (
         <div>
-            <div className="status">{status}</div>
+            {/* <div className="status">{status}</div> */}
             <div className="board-row">
                 {this.renderSquare(0)}
                 {this.renderSquare(1)}
@@ -107,14 +93,46 @@ class Game extends React.Component {
         };
     }
 
+    handleClick(i) {
+        const history = this.state.history;
+        const current = history[history.length - 1];
+        const cuadrados = current.cuadrados.slice();
+
+        if(calcularGanador(cuadrados) || cuadrados[i]) {
+            return;
+        }
+        cuadrados[i] = this.state.xIsNext ? 'X': 'O';
+        this.setState({
+            history: history.concat([{
+                cuadrados: cuadrados,
+            }]),
+            xIsNext: !this.state.xIsNext,
+        });
+    }
+
     render() {
+
+    const history = this.state.history;
+    const current = history[history.length - 1];
+    const winner = calcularGanador(current.cuadrados);
+
+    let status;
+    if(winner) {
+        status = 'Winner: ' + winner;
+    } else {
+        status = 'Next player: ' + (this.state.xIsNext ? 'X' : 'O');
+    }
+
     return (
         <div className="game">
             <div className="game-board">
-                <Borde />
+                <Borde 
+                    cuadrados={current.cuadrados}
+                    onClick={(i) => this.handleClick(i)}
+                />
             </div>
             <div className="game-info">
-                <div>{/* status */}</div>
+                <div>{status}</div>
                 <ol>{/* TODO */}</ol>
             </div>
         </div>
