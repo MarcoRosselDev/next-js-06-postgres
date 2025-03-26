@@ -1,10 +1,12 @@
 import Image from "next/image";
 import styles from "./page.module.css";
 import Check from "@/components/windows";
+import { Query } from "@/components/query";
 
-export default function Home() {  
+export default function Home() {
   return (
     <div className={styles.page}>
+      <Query />
       <main className={styles.main}>
         <Check />
         <Image
