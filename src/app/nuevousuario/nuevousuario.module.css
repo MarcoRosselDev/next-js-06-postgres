@@ -1,0 +1,16 @@
+.main{
+  border: 2px solid blue;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  form {
+    border: 2px solid pink;
+    display: flex;
+    flex-direction: column;
+    max-width: 400px;      
+    
+    margin-top: 50px;
+  }
+}

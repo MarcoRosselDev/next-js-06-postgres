@@ -1,14 +1,14 @@
 import Image from "next/image";
 import styles from "./page.module.css";
-import Check from "@/components/windows";
 import { Query } from "@/components/query";
+import Header from "@/components/Header";
 
 export default function Home() {
   return (
     <div className={styles.page}>
-      <Query />
+      <Header />
       <main className={styles.main}>
-        <Check />
+        <Query />
         <Image
           className={styles.logo}
           src="/next.svg"
