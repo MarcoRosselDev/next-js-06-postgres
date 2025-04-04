@@ -1,7 +1,7 @@
-
 import Link from "next/link";
 import styles from "./nuevousuario.module.css"
-import sql from "@/db/postgres";
+import bcrypt from "bcrypt";
+import queryNuevoUsuario from "./queryNuevoUsuario";
 
 export default function CrearUsuario() {
 
@@ -9,16 +9,21 @@ export default function CrearUsuario() {
     "use server"
     // get nombre come from input--> name="nombre"
     const nombre = formData.get("nombre")
-    const pass = formData.get("password")
-    console.log(nombre, pass, formData);
     const id_usuario =  Math.round((Math.random() * 23) + (Math.random() * 1000));
-    const crearUsuario = await sql`
-    INSERT INTO usuarios (nombre, id_usuario, password)
-    values (${nombre}, ${id_usuario}, ${pass})
-    `
-    Promise.all([crearUsuario])
-      .then(data => console.log(data))
-      .catch(error => console.log(error))
+    const pass = formData.get("password")
+    console.log(formData, pass);
+    
+    bcrypt.hash(pass, 10, function(err, hash) {
+      // Store hash in your password DB.
+      if (err) {
+        console.log(err);
+      }
+      try { 
+        queryNuevoUsuario(nombre, id_usuario, hash);
+      } catch (error) {
+        console.log(error);
+      }
+    });
   }
 
 /*   async function onSubmit(event: FormEvent<HTMLFormElement>) {

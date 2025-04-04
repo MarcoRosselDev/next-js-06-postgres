@@ -1,6 +1,7 @@
 import styles from "./page.module.css";
 /* import { Query } from "@/components/query"; */
 import Header from "@/components/Header";
+import { Usuarios } from "@/components/Usuarios"
 
 export default async function Home() {
   return (
@@ -8,6 +9,7 @@ export default async function Home() {
       <Header />
       <main className={styles.main}>
         {/* <Query /> */}
+        <Usuarios />
       </main>
       <footer className={styles.footer}>
         <p>footer</p>
