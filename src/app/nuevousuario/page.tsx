@@ -1,6 +1,7 @@
 
 import Link from "next/link";
 import styles from "./nuevousuario.module.css"
+import sql from "@/db/postgres";
 
 export default function CrearUsuario() {
 
@@ -10,6 +11,14 @@ export default function CrearUsuario() {
     const nombre = formData.get("nombre")
     const pass = formData.get("password")
     console.log(nombre, pass, formData);
+    const id_usuario =  Math.round((Math.random() * 23) + (Math.random() * 1000));
+    const crearUsuario = await sql`
+    INSERT INTO usuarios (nombre, id_usuario, password)
+    values (${nombre}, ${id_usuario}, ${pass})
+    `
+    Promise.all([crearUsuario])
+      .then(data => console.log(data))
+      .catch(error => console.log(error))
   }
 
 /*   async function onSubmit(event: FormEvent<HTMLFormElement>) {
