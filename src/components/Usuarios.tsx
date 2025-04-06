@@ -15,10 +15,15 @@ async function Usuarios() {
   return(
     <>
       {
-        data.map((value,index) => {
-          return <p key={index}>{value.nombre} < br/> 
-          password = {value.password} </p>
-        })
+      data.map((value,index) => {
+        return (
+        <div key={index}>
+          <p >{value.nombre} </p>
+          <p> password = {value.password} </p>
+          <p>id : {value.id_usuario}</p>
+        </div>
+        )
+      })
       }
     </>
   )

@@ -2,16 +2,9 @@ import sql from "@/db/postgres";
 
 export default async function Poblar() {
 
-  const creartabla = sql`CREATE TABLE usuarios
-  (
-      nombre character varying(100) NOT NULL,
-      id_usuario character varying(100) NOT NULL,
-      password character varying(100) NOT NULL,
-      PRIMARY KEY (id_usuario)
-  );
-`;
+  const deleteTable = sql`DROP TABLE usuarios;`
 
-  Promise.all([creartabla]).then(data => console.log(data))
+  Promise.all([deleteTable]).then(data => console.log(data))
 
   return (
     <div>
@@ -20,7 +13,7 @@ export default async function Poblar() {
   );
 }
 
-/* 
+/*  crear database
 CODIGO PARA CRAR UNA NUEVA DB DESDE POSTGRES DB DEFAULT SERVER
 SOLO SIRVE SI LO LLAMAMOS LA PRIMERA VEZ, LUEGO ELIMINAR O COMENTAR
 POR QUE LANZARA ERROR,
@@ -46,4 +39,18 @@ CREAR TABLA:
       PRIMARY KEY (id_usuario)
   );
 `
+*/
+
+/* crear tabla modo prueba
+const creartabla = sql`CREATE TABLE usuarios
+  (
+      nombre character varying(100) NOT NULL,
+      id_usuario character varying(100) NOT NULL,
+      password character varying(100) NOT NULL,
+      PRIMARY KEY (id_usuario)
+  );
+`; */
+
+/* eliminar usuarios
+const deleteTable = sql`DROP TABLE usuarios;`
 */
