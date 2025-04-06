@@ -2,9 +2,16 @@ import sql from "@/db/postgres";
 
 export default async function Poblar() {
 
-  const deleteTable = sql`DROP TABLE usuarios;`
+  const crearTablaUsuarios = sql`CREATE TABLE usuarios
+(
+    nombre character varying(50) NOT NULL,
+    id_usuario serial NOT NULL,
+    password character varying(250) NOT NULL,
+    id_publica character varying(250) NOT NULL,
+    PRIMARY KEY (id_usuario)
+);`
 
-  Promise.all([deleteTable]).then(data => console.log(data))
+  Promise.all([crearTablaUsuarios]).then(data => console.log(data))
 
   return (
     <div>

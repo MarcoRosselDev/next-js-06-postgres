@@ -2,6 +2,7 @@ import Link from "next/link";
 import styles from "./nuevousuario.module.css"
 import bcrypt from "bcrypt";
 import queryNuevoUsuario from "./queryNuevoUsuario";
+import { v4 as uuidv4 } from 'uuid';
 
 export default function CrearUsuario() {
 
@@ -9,7 +10,8 @@ export default function CrearUsuario() {
     "use server"
     // get nombre come from input--> name="nombre"
     const nombre = formData.get("nombre")
-    const id_usuario =  Math.round((Math.random() * 23) + (Math.random() * 1000));
+    const id_publica = uuidv4();
+    //const id_publica =  Math.round((Math.random() * 23) + (Math.random() * 1000));
     const pass = formData.get("password")
     console.log(formData, pass);
     
@@ -19,7 +21,8 @@ export default function CrearUsuario() {
         console.log(err);
       }
       try { 
-        queryNuevoUsuario(nombre, id_usuario, hash);
+        /* (nombre, password, id_publica) */
+        queryNuevoUsuario(nombre, hash, id_publica);
       } catch (error) {
         console.log(error);
       }

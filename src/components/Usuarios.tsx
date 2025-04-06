@@ -18,9 +18,10 @@ async function Usuarios() {
       data.map((value,index) => {
         return (
         <div key={index}>
-          <p >{value.nombre} </p>
-          <p> password = {value.password} </p>
-          <p>id : {value.id_usuario}</p>
+          <p >nombre : {value.nombre} </p>
+          <p> password : {value.password}</p>
+          <p>id_privada : {value.id_usuario}</p>
+          <p>id_publica : {value.id_publica}</p>
         </div>
         )
       })
