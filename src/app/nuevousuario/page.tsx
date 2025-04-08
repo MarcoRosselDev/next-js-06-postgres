@@ -3,6 +3,7 @@ import styles from "./nuevousuario.module.css"
 import bcrypt from "bcrypt";
 import queryNuevoUsuario from "./queryNuevoUsuario";
 import { v4 as uuidv4 } from 'uuid';
+//import { redirect } from 'next/navigation';
 
 export default function CrearUsuario() {
 
@@ -10,11 +11,11 @@ export default function CrearUsuario() {
     "use server"
     // get nombre come from input--> name="nombre"
     const nombre = formData.get("nombre")
-    const id_publica = uuidv4();
-    //const id_publica =  Math.round((Math.random() * 23) + (Math.random() * 1000));
     const pass = formData.get("password")
-    console.log(formData, pass);
-    
+    const id_publica = uuidv4();
+    console.log("1", formData, pass);
+    console.log("2", typeof nombre, typeof pass, typeof formData);    
+
     bcrypt.hash(pass, 10, function(err, hash) {
       // Store hash in your password DB.
       if (err) {
@@ -26,7 +27,8 @@ export default function CrearUsuario() {
       } catch (error) {
         console.log(error);
       }
-    });
+    });   
+    
   }
 
 /*   async function onSubmit(event: FormEvent<HTMLFormElement>) {
