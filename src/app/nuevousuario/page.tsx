@@ -4,6 +4,8 @@ import bcrypt from "bcrypt";
 import queryNuevoUsuario from "./queryNuevoUsuario";
 import { v4 as uuidv4 } from 'uuid';
 //import { redirect } from 'next/navigation';
+//import { revalidatePath } from 'next/cache'
+
 
 export default function CrearUsuario() {
 
@@ -22,11 +24,13 @@ export default function CrearUsuario() {
         console.log(err);
       }
       try { 
-        /* (nombre, password, id_publica) */
         queryNuevoUsuario(nombre, hash, id_publica);
       } catch (error) {
-        console.log(error);
+        console.log("error en el try catch en page.nuevousuario", error);
       }
+
+      //revalidatePath('/')
+      //redirect("/")
     });   
     
   }

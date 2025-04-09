@@ -1,15 +1,12 @@
 import sql from "@/db/postgres";
-import { redirect } from 'next/navigation';
 
 export default async function queryNuevoUsuario (nombre: string, hash: string , id_publica: string) {
-
-  const query = await sql`INSERT INTO usuarios (nombre, password, id_publica)
-        values (${nombre}, ${hash}, ${id_publica}) ;`
-  if (query) {
-    console.log(query);
-    
-    redirect('/login');
-  }
+  return await sql`INSERT INTO usuarios (nombre, password, id_publica)
+  values (${nombre}, ${hash}, ${id_publica}) ;`
+    .then(data => {
+      console.log("fn query nuevo usuario", data, typeof data);
+    })
+    .catch(error => console.log("error fn query nuevo usuario", error))
 }
 /* 
 nombre character varying(50) NOT NULL
