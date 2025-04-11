@@ -6,8 +6,8 @@ type ResponseData = {
  
 export default function handler(
   req: NextApiRequest,
-  res: NextApiResponse<ResponseData>
-) {
+  res: NextApiResponse<ResponseData>) {
   console.log(req, "from api");
-  res.status(200).json({ message: 'Hello from Next.js!' })
+
+  res.status(200).json({ message: 'Hello from Next.js!'})
 }

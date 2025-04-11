@@ -1,10 +1,15 @@
 function sumar(a, b) {
-  return a + b
+  return a + b;
 }
 
-let promesa = new Promise((resolve, reject)=> {
+const promesa = new Promise((resolve, reject)=> {
   setTimeout(()=>{
-    sumar(3,3)
+    const logica = false;
+    if (logica) {
+      resolve(sumar(3,3))
+    } else {
+      reject("something happen!")
+    }
   }, 4000)
 })
 
