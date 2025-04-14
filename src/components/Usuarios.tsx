@@ -1,4 +1,5 @@
 import sql from "../db/postgres";
+import BtnEliminarUsuario from "./BtnEliminarUsuario";
 
 /* async function getUsersOver(age:number) {
   const users = await sql`select name, age from users where age > ${ age }`
@@ -7,21 +8,33 @@ import sql from "../db/postgres";
 }
  */
 async function getQuery() {
-  return await sql`select * from usuarios; `
+  return await sql`select * from usuarios;`
+  //return await sql`select ROW_TO_JSON(select * from usuarios);`
 }
 
 async function Usuarios() {
+
   const data = await getQuery()
   return(
     <>
       {
       data.map((value,index) => {
+
+        const values = {
+          id_publica: value.id_publica,
+          password: value.password,
+          id_usuario: value.id_usuario,
+          nombre: value.nombre,
+        }
+
         return (
         <div key={index}>
           <p >nombre : {value.nombre} </p>
           <p> password : {value.password}</p>
           <p>id_privada : {value.id_usuario}</p>
           <p>id_publica : {value.id_publica}</p>
+
+          <BtnEliminarUsuario  targetValue={values} />
         </div>
         )
       })
