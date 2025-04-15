@@ -1,4 +1,5 @@
 "use client"
+import { FnExample } from "./fn";
 import styles from "./typescript.module.css";
 
 type ButtonProps = {
@@ -15,6 +16,10 @@ function MyComponente(props:ButtonProps) {
       <button onClick={(event) => {
         console.log("hi", event);
       }}>click me !</button>
+      <FnExample click={(t) =>{
+        console.log(t);
+      }} texto="Me gusta nextjs !" />
+
     </>
   )
 }
