@@ -1,17 +1,25 @@
+"use client"
 import styles from "./typescript.module.css";
 
-function MyComponente(params:{nombre: string, edad: number}) {
-  "use client"
+type ButtonProps = {
+  nombre: string
+  edad: number
+}
+
+//function MyComponente(params:{nombre: string, edad: number}) {
+function MyComponente(props:ButtonProps) {
+  const {edad, nombre} = props;
   return (
     <>
-      <p>{params.nombre}, tengo {params.edad} años de edad</p>
-      <button onClick={() => console.log("j")}>click me !</button>
+      <p>{nombre}, tengo {edad} años de edad</p>
+      <button onClick={(event) => {
+        console.log("hi", event);
+      }}>click me !</button>
     </>
   )
 }
 
-export default async function Typescript() {
-  "use client"
+export default function Typescript() {
   return (
     <div className={styles.ejemplo}>
       <p>Hola typescript</p>
