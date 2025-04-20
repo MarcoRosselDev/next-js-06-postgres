@@ -1,38 +1,37 @@
 import Link from "next/link";
 import styles from "./nuevousuario.module.css"
 import bcrypt from "bcrypt";
-import queryNuevoUsuario from "./queryNuevoUsuario";
+import {QueryInputType , queryNuevoUsuario} from "./queryNuevoUsuario";
 import { v4 as uuidv4 } from 'uuid';
+import {validador, ObjetoUsuario} from "./ej_validacion";
 //import { redirect } from 'next/navigation';
 //import { revalidatePath } from 'next/cache'
-
 
 export default function CrearUsuario() {
 
   async function create(formData:FormData) {
     "use server"
     // get nombre come from input--> name="nombre"
-    const nombre = formData.get("nombre")
-    const pass = formData.get("password")
-    const id_publica = uuidv4();
-    console.log("1", formData, pass);
-    console.log("2", typeof nombre, typeof pass, typeof formData);    
+    const nombre = formData.get("nombre")?.toString()
+    const pass = formData.get("password")?.toString()
 
-    bcrypt.hash(pass, 10, function(err, hash) {
-      // Store hash in your password DB.
-      if (err) {
-        console.log(err);
-      }
-      try { 
-        queryNuevoUsuario(nombre, hash, id_publica);
-      } catch (error) {
-        console.log("error en el try catch en page.nuevousuario", error);
-      }
-
-      //revalidatePath('/')
-      //redirect("/")
-    });   
-    
+    if (nombre != undefined && pass != undefined) {
+      bcrypt.hash(pass, 10, async function(err, hash) {
+        // Store hash in your password DB.
+        try {
+          // validacion con zod
+          const id_publica = uuidv4();
+          const nuevousuario = await validador({nombre, pass: hash})
+          queryNuevoUsuario({hash: nuevousuario.pass, id_publica, nombre: nuevousuario.nombre});
+        } catch (error) {
+          console.log("error en el try catch en page.nuevousuario", error);
+        }
+  
+        //revalidatePath('/')
+        //redirect("/")
+      });   
+  
+    }
   }
 
 /*   async function onSubmit(event: FormEvent<HTMLFormElement>) {
