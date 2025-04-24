@@ -1,30 +1,32 @@
 "use client"
 //import { useForm, SubmitHandler } from "react-hook-form"
-import { useForm } from "react-hook-form"
-import style from "./formstyle.module.css"
+import {SubmitHandler, useForm} from 'react-hook-form'
+
 
 type Inputs = {
-  example: string
-  exampleRequired: string
+  name: string
+  lastName: string
 }
 
-export default function Form() {
-  const { register, handleSubmit, watch, formState: { errors } } = useForm<Inputs>()
-  //const onSubmit: SubmitHandler<Inputs> = (data) => console.log(data)
+export default function FormComponent() {
   
-  console.log(watch("example"))
+  const{register, handleSubmit} = useForm<Inputs>();
+
+  const onSubmit: SubmitHandler<Inputs> = (data) => {
+    console.log(data);
+  }
 
   return (
-    <div className={style.something}>
-      <p>Hola mundo</p>
-      <form onSubmit={handleSubmit((data) => console.log(data))}>
-      <input defaultValue="test" {...register("example")} />
-      {/* include validation with required or other standard HTML validation rules */}
-      <input {...register("exampleRequired", { required: true })} />
-      {/* errors will return when field validation fails  */}
-      {errors.exampleRequired && <span>This field is required</span>}
-      <input type="submit" />
+    <div>
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <label htmlFor="">name</label>
+        <input type="text" placeholder='nomber...' {...register("name")}/>
+        <label htmlFor="">last name</label>
+        <input type="text" placeholder='nomber...' {...register("lastName")}/>
+
+        <button type="submit">send</button>
       </form>
+      <p>Hi</p>
     </div>
   )
 }
