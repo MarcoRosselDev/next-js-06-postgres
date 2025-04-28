@@ -1,0 +1,11 @@
+.login_main_div{
+  display: flex;
+  flex-direction: column;
+  padding: 30px;
+  gap: 10px;
+  border: 2px solid lightblue;
+}
+
+.button_login{
+  margin-top: 30px;
+}
