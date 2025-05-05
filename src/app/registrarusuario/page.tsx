@@ -16,11 +16,17 @@ type Input = {
 
 export default function RegistrarUsuario () {
 
-  const {register, handleSubmit, formState:{errors}} = useForm<Input>({resolver: zodResolver(schema)})
+  const {register, handleSubmit, formState:{errors}} = useForm({resolver: zodResolver(schema)})
 
   const onSubmit: SubmitHandler<Input> = (data) => {
     console.log(data);
     console.log(errors);
+    /* en esta parte va la logistica de postgresql
+    luego de registrar redirigir al inicio
+    
+    .futuros pasos revisar el error en resolver
+    .y crear el login y manejo de cookies para mantener seciones abiertas
+    */
   }
 
   const opcionesPlan = plans.map(val => {
