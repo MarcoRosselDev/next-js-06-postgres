@@ -1,12 +1,16 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
+  --foreground2: #bebcbc4b;
+  --span:rgb(7, 173, 239);
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
     --background: #0a0a0a;
     --foreground: #ededed;
+    --foreground2: #bebcbc4b;
+    --span: coral;
   }
 }
 
@@ -28,6 +32,10 @@ main {
   align-items: center;
 }
 
+input{
+  background-color: var(--foreground2);
+}
+
 form{
   display: flex;
   flex-direction: column;
@@ -36,12 +44,21 @@ form{
   justify-content: center;
   max-width: 500px;
   gap: 4px;
+  margin-top: 30px;
 }
 
 input{
   padding: 4px;
   border-radius: 5px;
-  border: 1px solid var(--foreground);
+  border: 1px solid var(--foreground2);
+  color: var(--foreground);
+}
+
+span{
+  margin-bottom: 8px;
+  border-bottom: 1px solid var(--foreground2);
+  padding-bottom: 4px;
+  color: var(--span);
 }
 
 body {
