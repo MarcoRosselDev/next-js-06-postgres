@@ -14,11 +14,34 @@ html,
 body {
   max-width: 100vw;
   overflow-x: hidden;
-  display: flex;
   width: 100vw;
+  display: flex;
   justify-content: center;
   align-items: center;
-  border: 3px solid rgba(3, 232, 220, 0.067);
+}
+
+main {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+form{
+  display: flex;
+  flex-direction: column;
+  padding: 5px;
+  width: 100%;
+  justify-content: center;
+  max-width: 500px;
+  gap: 4px;
+}
+
+input{
+  padding: 4px;
+  border-radius: 5px;
+  border: 1px solid var(--foreground);
 }
 
 body {

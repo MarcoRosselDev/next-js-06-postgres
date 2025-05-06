@@ -1,7 +1,7 @@
 .main{
   display: flex;
   flex-direction: column;
-  border: 2px solid slateblue;
+/*   border: 2px solid slateblue; */
   width: 100%;
   justify-content: center;
   align-items: center;
