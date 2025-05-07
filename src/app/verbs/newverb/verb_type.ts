@@ -3,5 +3,5 @@ export type Input = {
   simplepast: string
   presentperfect: string
   presentcontinuous: string
-  infinitvo: string
+  infinitivo: string
 }
