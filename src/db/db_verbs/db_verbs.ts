@@ -1,8 +1,5 @@
-import postgres from 'postgres';
-
-const sql = postgres(process.env.POSTGRES_URL!, { ssl: 'require' });
-
-export async function seedUsers() {
+import sql from '../postgres';
+/* export async function seedUsers() {
   await sql`CREATE EXTENSION IF NOT EXISTS "uuid-ossp"`;
   await sql`
     CREATE TABLE IF NOT EXISTS users (
@@ -12,4 +9,24 @@ export async function seedUsers() {
       password TEXT NOT NULL
     );
   `;
+} */
+
+export async function createTabla() {
+  return await sql`CREATE TABLE verbs_table
+(
+    regularverb character varying(20) NOT NULL,
+    simplepast character varying(20) NOT NULL,
+    presentperfect character varying(20) NOT NULL,
+    presentcontinuous character varying(20) NOT NULL,
+    infinitivo character varying(20) NOT NULL,
+    id_public character varying(200) NOT NULL,
+    id serial NOT NULL,
+    PRIMARY KEY (id)
+);
+`
+
 }
+
+/* export async function createDbVerbs() {
+  await sql`CREATE DATABASE verbs;`
+} */
