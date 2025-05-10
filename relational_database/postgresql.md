@@ -11,8 +11,19 @@ CREATE TABLE table_name();
 <!-- crear una tabla con clumnas al toke -->
 CREATE TABLE table_name(column_name DATATYPE CONSTRAINTS);
 
+<!-- ejempolo crear tabla con clumnas al toke -->
+CERATE TABLE person(
+  id int,
+  name varchar(20),
+  date TIMESTAMP,
+);
+
 <!-- agregar columna a una tabla -->
 ALTER TABLE table_name ADD COLUMN column_name DATATYPE;
+
+<!-- agregar restricion unique a columna excistente -->
+ALTER TABLE description
+ADD UNIQUE (name);
 
 <!-- agregar columna, con restriccion no nullo -->
 ALTER TABLE table_name ADD COLUMN column_name DATATYPE NOT NULL;
