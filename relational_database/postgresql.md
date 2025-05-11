@@ -18,6 +18,15 @@ CERATE TABLE person(
   date TIMESTAMP,
 );
 
+<!-- ejemplo de crear tabla (buena practica, not null, serial, primary key) -->
+CREATE TABLE person(
+  id BIGSERIAL NOT NULL PRIMARY KEY,
+  name VARCHAR(50) NOT NULL,
+  last_name VARCHAR(50) NOT NULL,
+  date_of_bithday DATE NOT NULL,
+  age INT NOT NULL,
+);
+
 <!-- agregar columna a una tabla -->
 ALTER TABLE table_name ADD COLUMN column_name DATATYPE;
 
@@ -117,6 +126,32 @@ SELECT columns FROM table_1 FULL JOIN table_2 ON table_1.primary_key_column = ta
 SELECT columns FROM junction_table
 FULL JOIN table_1 ON junction_table.foreign_key_column = table_1.primary_key_column
 FULL JOIN table_2 ON junction_table.foreign_key_column = table_2.primary_key_column;
+
+<!-- orden ascendente -->
+SELECT columns FROM tabla ORDER BY coumn; // ASC por defecto
+
+<!-- orden descendente -->
+SELECT columns FROM tabla ORDER BY coumn DESC; //
+
+<!-- registros no duplicados -->
+SELECT DISTINCT country FROM table ORDERN BY country;
+
+<!-- condicion x -->
+SELECT * FROM table WHERE gender='Female';
+
+<!-- dos condiciones -->
+SELECT * FROM table WHERE gender='Female' AND nacionalidad='Chile';
+
+<!-- x or y condition-->
+SELECT * FROM table WHERE nacionalidad='Argentina' OR nacionalidad='Chile';
+
+
+
+
+
+<!-- comparativos y aritmetica -->
+
+
 
 ```
 
