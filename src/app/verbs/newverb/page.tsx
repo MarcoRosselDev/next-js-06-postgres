@@ -4,12 +4,19 @@ import {useForm, SubmitHandler} from "react-hook-form"
 import { Input } from "./verb_type"
 import { zodResolver } from '@hookform/resolvers/zod';
 import {newVerbSchema as schema} from "./handleErros"
+import { createVerb } from "./newVerb";
+
+
 
 export default function NewVerb(){
   
   const {register, handleSubmit, formState:{errors}} = useForm({resolver: zodResolver(schema)})
 
-  const handleForm: SubmitHandler<Input> = (data) => console.log(data);
+  const handleForm: SubmitHandler<Input> = (data) => {
+    createVerb(data)
+  }
+
+  
   
   return (
     <main>

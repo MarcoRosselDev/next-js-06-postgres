@@ -45,6 +45,9 @@ ALTER TABLE table_name ADD UNIQUE(column_name);
 <!-- agregar columna primary key -->
 ALTER TABLE table_name ADD PRIMARY KEY(column_name);
 
+<!-- agregar primary key doble -->
+ALTER TABLE table ADD PRIMARY KEY(columna1, columna2);
+
 <!-- agregar una clave foranea -->
 ALTER TABLE table_name ADD COLUMN column_name DATATYPE REFERENCES referenced_table_name(referenced_column_name);
 ALTER TABLE more_info  ADD COLUMN character_id INT REFERENCES characters(character_id);
@@ -53,7 +56,7 @@ ALTER TABLE more_info  ADD COLUMN character_id INT REFERENCES characters(charact
 ALTER TABLE table_name ADD COLUMN column_name DATATYPE CONSTRAINT REFERENCES referenced_table_name(referenced_column_name);
 
 <!-- alterar una excistente para que sea una llave foranea -->
-ALTER TABLE character_actions ADD FORAIGN KEY(character_id) REFERENCES characters(character_id);
+ALTER TABLE character_actions ADD FOREIGN KEY(character_id) REFERENCES characters(character_id);
 
 
 <!-- renombrar----------------------------------------- -->
@@ -83,6 +86,11 @@ VALUES('Mario', 'Mushroom Kingdom', 'Red'),
 <!-- eliminar----------------------------------------- -->
 <!-- eliminar registro (con condicion)  -->
 DELETE FROM table_name WHERE condition;
+
+<!-- eliminar una tabla -->
+DROP TABLE nombredb;
+<!-- eliminar tabla con restricciones (comando mas poderoso) -->
+DROP TABLE nombredb CASCADE;
 
 <!-- eliminar una base de datos -->
 DROP DATABASE "MyDatabase";

@@ -8,7 +8,7 @@ import BtnEliminarUsuario from "./BtnEliminarUsuario";
 }
  */
 async function getQuery() {
-  return await sql`select * from usuarios;`
+  return await sql`select * from verbs_table;`
   //return await sql`select ROW_TO_JSON(select * from usuarios);`
 }
 
@@ -24,21 +24,25 @@ async function Usuarios() {
   return(
     <>
     {
-    data.map((value,index) => {
+    data.map(({infinitivo, presentcontinuous, presentperfect,regularverb, simplepast, id_public},index) => {
 
       const values = {
-        id_publica: value.id_publica,
-        password: value.password,
-        id_usuario: value.id_usuario,
-        nombre: value.nombre,
+        id_publica: id_public,
+        infinitivo,
+        presentcontinuous,
+        presentperfect,
+        regularverb,
+        simplepast
       }
 
       return (
       <div key={index}>
-        <p >nombre : {value.nombre} </p>
-        <p> password : {value.password}</p>
-        <p>id_privada : {value.id_usuario}</p>
-        <p>id_publica : {value.id_publica}</p>
+        <p >id_public : {id_public} </p>
+        <p> infinitivo: {infinitivo}</p>
+        <p>presentcontinuous : {presentcontinuous}</p>
+        <p>presentperfect : {presentperfect}</p>
+        <p>regularverb : {regularverb}</p>
+        <p>simplepast : {simplepast}</p>
 
         <BtnEliminarUsuario  targetValue={values} />
       </div>

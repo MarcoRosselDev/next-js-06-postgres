@@ -1,15 +1,9 @@
 "use client"
+import { Input } from "@/app/verbs/newverb/verb_type";
 
-type DeleteType = {
-  id_publica : string;
-  id_usuario : number;
-  nombre: string;
-  password: string;
-}
-
-export default function BtnEliminarUsuario(targetValue: { targetValue: DeleteType}){
+export default function BtnEliminarUsuario(targetValue: { targetValue: Input}){
   return (
-    <button onClick={() => console.log(targetValue.targetValue.id_usuario, targetValue)}>
+    <button onClick={() => console.log(targetValue.targetValue.id_public, targetValue)}>
       eliminar usuario
     </button>
   )
