@@ -145,15 +145,38 @@ SELECT * FROM table WHERE gender='Female' AND nacionalidad='Chile';
 <!-- x or y condition-->
 SELECT * FROM table WHERE nacionalidad='Argentina' OR nacionalidad='Chile';
 
+<!-- limit -->
+SELECT * FROM table LIMIT 5
+
+<!-- siguientes 5 (OFFSET <n desde donde se quiere contar>) -->
+SELECT * FROM table OFFSET 5 LIMIT 5          // para paginacion
+
+<!-- FETCH (key oficial para LIMIT de sql, LIMIT es propio de postgresql) -->
+SELECT * FROM table OFFSET 10 FETCH FIRST 5 ROW ONLY;
+
+<!-- estos dos son lo mismo si quiero solo 1 (sql standar) --> 
+SELECT * FROM table OFFSET 10 FETCH FIRST 1 ROW ONLY; 
+SELECT * FROM table OFFSET 10 FETCH FIRST ROW ONLY; 
 
 
+<!-- where -->
+SELECT * FROM table WHERE country='Chile' OR country='Peru';
+<!-- where IN (array de matches) -->
+SELECT * FROM table 
+WHERE country IN ('Chile', 'Peru', 'n...');
 
+<!-- between -->
+SELECT * FROM table
+WHERE nacimiento
+BETWEEN DATE '2000-01-01' AND '2015-01-01';
 
 <!-- comparativos y aritmetica -->
 
 
 
 ```
+## operadores
+[link a documentacion de posgresql operators](https://www.postgresql.org/docs/6.3/c09.htm)
 
 ## comandos
 ```terminal

@@ -179,3 +179,54 @@ varias lineas
 #### saltos de linea en titulos de shell
 
 echo -e "\n~~ Countdown Timer ~~\n"
+
+#### env variables comand
+printenv
+<!-- log env -->
+echo $ENV_VARIABLE
+
+<!-- todas las variables de entorno -->
+declare -p
+
+```sh
+-eq = igual (equal)
+-ne = no igual (not equal)
+-lt = menor que (less than)
+-le = menor o igual que (less than or equal)
+-gt = mayor que (greater than)
+-ge = mayor o igual que (greater then or qual)
+```
+
+#### function
+
+```js
+function FUNCTION_NAME() {
+  STATEMENTS
+}
+/* para llamarlo */
+
+FUNCTION_NAME
+/* para pasarle argumentos */
+
+FUNCTION_NAME arg1 arg2
+```
+
+#### until (similar al while loop)
+
+```sh
+until [[ CONDITION ]]
+do
+  STATEMENTS
+done
+```
+
+#### patrones match
+
+[[ 'hello world' =~ 'lo wor' ]]; echo $?
+<!-- podemos usar regex tmbn (expresiones regulares
+por ejemplo:
+
+[[ "hello world" =~ ^h.+d$ ]]; echo $?
+
+para preguntar si comienza con la letra h y termina con la letra d
+) -->
