@@ -1,56 +1,67 @@
 import sql from "../db/postgres";
-import BtnEliminarUsuario from "./BtnEliminarUsuario";
 
-/* async function getUsersOver(age:number) {
-  const users = await sql`select name, age from users where age > ${ age }`
-  // users = Result [{ name: "Walter", age: 80 }, { name: 'Murray', age: 68 }, ...]
-  return users
-}
- */
-async function getQuery() {
-  return await sql`select * from verbs_table;`
-  //return await sql`select ROW_TO_JSON(select * from usuarios);`
-}
+export async function Usuarios() {
+  const data = await sql`SELECT * FROM verbs_table;`;
 
-/* async function deleteUser(id:number) {
-  return await sql`delelte from usuarios where id_usuario=${id}`
-}
- */
+  return (
+    <table>
+      <tr>
+        <th>regular</th>
+        <th>simple past</th>
+        <th>present perfect</th>
+        <th>present continuous</th>
+        <th>infinitivo</th>
+      </tr>
+      {
+        data.map((value,index) =>{
+          console.log(value, index);
+          const {regularverb,
+            simplepast, 
+            presentcontinuous, 
+            presentperfect,
+            infinitivo
+          } = value;
+          return (
+          <tr key={index}>
+            <td>{regularverb}</td>
+            <td>{simplepast}</td>
+            <td>{presentperfect}</td>
+            <td>{presentcontinuous}</td>
+            <td>{infinitivo}</td>
+          </tr>
 
-
-async function Usuarios() {
-  const data = await getQuery()
-
-  return(
-    <>
-    {
-    data.map(({infinitivo, presentcontinuous, presentperfect,regularverb, simplepast, id_public},index) => {
-
-      const values = {
-        id_publica: id_public,
-        infinitivo,
-        presentcontinuous,
-        presentperfect,
-        regularverb,
-        simplepast
+          )
+        })
       }
-
-      return (
-      <div key={index}>
-        <p >id_public : {id_public} </p>
-        <p> infinitivo: {infinitivo}</p>
-        <p>presentcontinuous : {presentcontinuous}</p>
-        <p>presentperfect : {presentperfect}</p>
-        <p>regularverb : {regularverb}</p>
-        <p>simplepast : {simplepast}</p>
-
-        <BtnEliminarUsuario  targetValue={values} />
-      </div>
-      )
-    })
-    }
-  </>
+    </table>
   )
 }
 
-export { getQuery, Usuarios};
+
+{/* table help from learning path of mozilla developer network (HTML)
+  <table>
+  <tr> -----------------------------> tr = row marker
+    <th>hola soy una celda</th> ----> th = header column marker
+    <th>esta bien cabrona</th>
+    <th>podemos hacer varias</th>
+  </tr>
+  <tr>
+    <td>hola soy una celda</td> ------> td = normal one
+    <td>esta bien cabrona</td>
+    <td>podemos hacer varias</td>
+  </tr>
+  <tr>
+    <td>hola soy una celda</td>
+    <td colSpan={2}>colSpan colapsa 2 hacia el lado</td>
+  </tr>
+  <tr>
+    <td rowSpan={2}>rowSpan colapsa n hacia abajo</td>
+    <td>esta bien cabrona</td>
+    <td>podemos hacer varias</td>
+  </tr>
+  <tr>
+    <td>hola soy una celda</td>
+    <td>esta bien cabrona</td>
+  </tr>
+</table>
+*/}

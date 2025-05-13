@@ -92,6 +92,12 @@ DROP TABLE nombredb;
 <!-- eliminar tabla con restricciones (comando mas poderoso) -->
 DROP TABLE nombredb CASCADE;
 
+<!-- eliminar todos los registros de una tabla -->
+TRUNCATE tabladb;
+
+<!-- eliminar los registros de varias tablas -->
+TRUNCATE tabla1, tabla2, tablan;
+
 <!-- eliminar una base de datos -->
 DROP DATABASE "MyDatabase";
 
