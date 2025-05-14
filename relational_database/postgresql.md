@@ -1,6 +1,6 @@
 ## pg
 
-```postgresql
+```sql
 <!-- crear ----------------------------------------- -->
 <!-- crecar una base de datos -->
 CREATE DATABASE random_name;
@@ -172,12 +172,67 @@ SELECT * FROM table OFFSET 10 FETCH FIRST 5 ROW ONLY;
 SELECT * FROM table OFFSET 10 FETCH FIRST 1 ROW ONLY; 
 SELECT * FROM table OFFSET 10 FETCH FIRST ROW ONLY; 
 
+<!-- SUMA ,AVG, MIN, MAX -->
+SELECT SUMA(columna) FROM tabla;
+
+<!-- LIKE, ILIKE -->
+<!-- '%a%' % = culaquier cosa antes o despues, '_a'= un caracter antes de e-->
+SELECT course FROM courses WHERE course ILIKE '_e%' OR course ILIKE '%s' ORDER BY course DESC LIMIT 5 
+
+<!-- redondeo y truncamiento de n -->
+<!-- avg = 3.1232 y CEIL retorna 4 (redondea hacia arriva) -->
+SELECT CEIL(AVG(major_id)) FROM students;
+<!-- avg = 3.1232 y ROUND retorna 3 (redondea hacia el mas cercano) -->
+SELECT ROUND(AVG(major_id)) FROM students;
+<!-- redondear con .digitos espesificos -->
+ROUND(<number_to_round>, <decimals_places>)
+ SELECT ROUND(AVG(major_id), 5) FROM students;
+
+<!-- COUNT -->
+SELECT COUNT(columna) FROM tabla;
+<!-- DISTINCT --> 
+SELECT DISTINCT(columna) FROM tabla; -- valores que no se repiten en una columna 
+SELECT major_id FROM students GROUP BY major_id; --lo mismo pero se puede convinar con MAX, MIN...++
+
+/* GROUP BY */
+SELECT major_id, MIN(gpa), MAX(gpa) FROM students GROUP BY major_id;
+
+/* GROUP BY HAVING */
+SELECT <column> FROM <table> GROUP BY <column> HAVING <condition>
+SELECT major_id, MIN(gpa), MAX(gpa) FROM students GROUP BY major_id HAVING MAX(gpa) = 4.0;
+-- ejemplo del proyecto student pt2
+SELECT major_id, COUNT(*) AS number_of_students, ROUND(AVG(gpa), 2) AS average_gpa 
+FROM students GROUP BY major_id HAVING COUNT(*) > 1;
+
+/* AS (renombrar columna en goup by) */
+SELECT major_id, MIN(gpa) AS min_gpa , MAX(gpa) FROM students GROUP BY major_id HAVING MAX(gpa) = 4.0;
+
+/* JOIN (juntar claves foraneas) */
+SELECT * FROM <table_1> FULL JOIN <table_2> ON <table_1>.<foreign_key_column> = <table_2>.<foreign_key_column>;
+SELECT * FROM students FULL JOIN majors ON students.major_id = majors.major_id;
+/* left, solo considera las coinsidencias de la izquierda */
+SELECT * FROM students LEFT JOIN majors ON students.major_id = majors.major_id;
+SELECT * FROM students RIGHT JOIN majors ON students.major_id = majors.major_id;
+/* INNER JOIN, retorna solo los que tengan la misma coinsidencia, en las 2 tablas */
+SELECT * FROM students INNER JOIN majors ON students.major_id = majors.major_id;
+
+/* vercion corta de JOIN */
+SELECT * FROM <table_1> FULL JOIN <table_2> USING(<column>);
+SELECT * FROM students FULL JOIN majors USING(major_id);
+
+/* unir mas de una tabla */
+SELECT * FROM <table_1> FULL JOIN <table_2> USING(<column>) FULL JOIN <table_3> USING(<column>)
+SELECT * FROM students FULL JOIN majors USING(major_id) FULL JOIN majors_courses USING(major_id);
+
+/* List of unique courses, in reverse alphabetical order, that no student or 'Obie Hilpert' is taking: */
+SELECT DISTINCT(course) FROM majors FULL JOIN students USING(major_id) FULL JOIN majors_courses USING(major_id) FULL JOIN courses USING(course_id) WHERE student_id IS NULL OR first_name='Obie' ORDER BY course DESC
 
 <!-- where -->
 SELECT * FROM table WHERE country='Chile' OR country='Peru';
 <!-- where IN (array de matches) -->
 SELECT * FROM table 
 WHERE country IN ('Chile', 'Peru', 'n...');
+SELECT ROUND(AVG(major_id), 5) FROM students
 
 <!-- between -->
 SELECT * FROM table
