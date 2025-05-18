@@ -54,7 +54,7 @@
 
   table {
     border-collapse: collapse;
-    border: 2px solid rgb(200,200,200);
+    border: 2px solid var(--button-secondary-hover);
     letter-spacing: 1px;
     font-size: 0.8rem;
   }
@@ -65,7 +65,7 @@
   }
 
   th {
-    background-color: rgb(235,235,235);
+    background-color: var(--button-primary-hover);
   }
 
   td {

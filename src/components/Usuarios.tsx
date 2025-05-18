@@ -3,6 +3,12 @@ import sql from "../db/postgres";
 export async function Usuarios() {
   const data = await sql`SELECT * FROM verbs_table;`;
 
+/*   const [tabla, setTabla] = useState([]);
+
+  useEffect(() =>{
+    setTabla(data);
+  },[])
+ */
   return (
     <table>
       <tr>
@@ -14,7 +20,6 @@ export async function Usuarios() {
       </tr>
       {
         data.map((value,index) =>{
-          console.log(value, index);
           const {regularverb,
             simplepast, 
             presentcontinuous, 
