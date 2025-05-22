@@ -6,3 +6,4 @@ Los componentes React tienen varios métodos especiales que proporcionan oportun
 articulo relacionado a los siclos de vida en concreto la eliminacion de componentWillUnmount();
 en verciones actuales de React.
 https://www.freecodecamp.org/news/how-to-safely-use-reacts-life-cycles-with-fiber-s-async-rendering-fd4469ebbd8f/
+
