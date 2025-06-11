@@ -1,3 +1,58 @@
 echo "~~ kitty_ipsum_1.txt info ~~" > kitty_info.txt  
 echo -e "\nNumber of lines:" >> kitty_info.txt
 cat kitty_ipsum_1.txt | wc -l >> kitty_info.txt
+echo -e "\nNumber of words:" >> kitty_info.txt
+cat kitty_ipsum_1.txt | wc -w >> kitty_info.txt
+echo -e "\nNumber of characters:" >> kitty_info.txt
+cat kitty_ipsum_1.txt | wc -m >> kitty_info.txt
+
+> esta vez utilizar el metodo de redireccionamiento en vez del metodo pipe |
+  wc -m kitty_ipsum_1.txt >> kitty_info.txt
+
+
+echo -e "\nNumber of times meow or meowzer appears:" >> kitty_info.txt
+grep --color 'meow[a-z]*' kitty_ipsum_1.txt
+
+grep -c 'meow[a-z]*' kitty_ipsum_1.txt // solo la cantidad de lineas no cuantas veces se repite la palabra
+
+grep -o 'meow[a-z]*' kitty_ipsum_1.txt // imprime el texto en lineas separadas, esto se puede contar con wc -l para contar las repeticiones.
+
+grep -o 'meow[a-z]*' kitty_ipsum_1.txt | wc -l
+7
+
+grep -o 'meow[a-z]*' kitty_ipsum_1.txt | wc -l >> kitty_info.txt  // lo enviamos al documento info
+
+
+echo -e "\n\n~~ kitty_ipsum_2.txt info ~~" >> kitty_info.txt 
+echo -e "\nNumber of lines:" >> kitty_info.txt 
+cat kitty_ipsum_2.txt | wc -l >> kitty_info.txt
+echo -e "\nNumber of words:" >> kitty_info.txt
+wc -w < kitty_ipsum_2.txt >> kitty_info.txt
+echo -e "\nNumber of characters:" >> kitty_info.txt
+cat kitty_ipsum_2.txt | wc -m >> kitty_info.txt
+
+
+echo -e "\nNumber of times meow or meowzer appears:" >> kitty_info.txt
+grep -o 'meow[a-z]*' kitty_ipsum_2.txt | wc -l >> kitty_info.txt
+echo -e "\nLines that they appear on:" >> kitty_info.txt
+echo -e "\nNumber of times cat, cats, or catnip appears:" >> kitty_info.txt
+grep -o 'cat[a-z]*' kitty_ipsum_2.txt | wc -l >> kitty_info.txt
+echo -e "\nLines that they appear on:" >> kitty_info.txt
+
+
+
+
+// campbiar
+grep -n 'meow[a-z]*' kitty_ipsum_1.txt | sed 's/[0-9]/1/'
+grep -n 'cat[a-z]*' kitty_ipsum_2.txt | sed -E 's/([0-9]+).*/\1/' >> kitty_info.txt 
+grep -n 'meow[a-z]*' kitty_ipsum_2.txt | sed -E 's/([0-9]+).*/\1/' >> kitty_info.txt 
+
+//grep --color 'meow[a-z]*' kitty_ipsum_2.txt
+//grep --color 'cat[a-z]*' kitty_ipsum_2.txt
+
+
+
+//grep --color 'dog[a-z]*'
+
+imprimir el resultado en colores para comprovar que se cambio catnip por dogchow
+./translate.sh kitty_ipsum_1.txt | grep --color 'dogchow'

@@ -62,3 +62,84 @@ para ver la cantidad de caracteres en vez de los bytes aplicamos la bandera -m
 ver manual de wc para ver todas las banderas
 
 man wc
+
+******
+<command> < <input_filename> >> <output_filename>   
+wc -m < kitty_ipsum_1.txt >> kitty_info.txt
+
+******
+
+# grep "busca patrones de texto en un archivo"   
+grep es un comando para buscar un patron de texto.
+sintaxis: grep '<pattern>' <filename>
+ejemplo para buscar el patron de texto "meow" en kitty_ipsum_1.txt
+grep 'meow' kitty_ipsum_1.txt
+
+output:
+hide from vacuum cleaner meow for catnip and act crazy steal
+shirt howl or gimme attention meow bye and eat grass, meow, and
+i stare at it i meow at it i do a wiggle come here birdy ears
+eat sniff catnip meow meowzer. good morning sunshine. lick human chase
+the pig around the house meow run in circles. always ensure to
+
+esto muestra todas las lineas donde aparece meow
+
+```terminal
+man grep
+
+// mostrar con color :
+grep 'meow' kitty_ipsum_1.txt --color
+
+// output
+hide from vacuum cleaner meow for catnip and act crazy steal
+shirt howl or gimme attention meow bye and eat grass, meow, and
+i stare at it i meow at it i do a wiggle come here birdy ears
+eat sniff catnip meow meowzer. good morning sunshine. lick human chase
+the pig around the house meow run in circles. always ensure to
+
+// lo mismo pero enumerar las listas:
+grep 'meow' kitty_ipsum_1.txt --color -n  
+grep 'meow[a-z]*' kitty_ipsum_1.txt --color -n  
+//output:
+1:hide from vacuum cleaner meow for catnip and act crazy steal
+4:shirt howl or gimme attention meow bye and eat grass, meow, and
+10:i stare at it i meow at it i do a wiggle come here birdy ears
+22:eat sniff catnip meow meowzer. good morning sunshine. lick human chase
+23:the pig around the house meow run in circles. always ensure to
+```
+
+# sed "reemplaza un patron por otro en un archivo"
+sintaxis:  
+
+sed 's/<pattern_to_replace>/<text_to_replace_it_with>/' <filename>  
+
+name.txt:   
+freeCodeCamp   
+
+sed 's/r/2/' name.txt
+f2eeCodeCamp
+
+sed 's/freecodecamp/f233C0d3C@mp/' name.txt
+freeCodeCamp // no lo reemplaso por las mayusculas no coinsiden, para ignorarlo aplicamos banderas en el ultimo / de sad:
+
+// i = ignorar las mayusculas  
+sed 's/freecodecamp/f233C0d3C@mp/i' name.txt
+f233C0d3C@mp
+
+// cat y pipe method
+cat name.txt | sed 's/freecodecamp/f233C0d3C@mp/i' 
+f233C0d3C@mp
+
+// campbiar
+grep -n 'meow[a-z]*' kitty_ipsum_1.txt | sed 's/[0-9]/1/'
+
+grep -n 'cat[a-z]*' kitty_ipsum_1.txt | sed -E 's/([0-9]+).*/\1/' >> kitty_info.txt 
+
+# mulitiples sed
+sed 's/<pattern_1>/<replacement_1>/; s/<pattern_2>/<replacement_2>/'
+sed 's/<pattern_1>/<replacement_1>/; s/<pattern_2>/<replacement_2>/'
+cat $1 | sed 's/catnip/dogchow/; s/cat/dog/; s/meow/woof/'
+
+# diff (muestra las diferencias entre archivos)
+
+diff <archivo1> <archivo2>
