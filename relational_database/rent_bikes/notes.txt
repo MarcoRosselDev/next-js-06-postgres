@@ -40,3 +40,25 @@ INSERT INTO bikes(type, size) VALUES('BMX', 19), ('BMX', 20), ('BMX', 21);
 pg_dump -cC --inserts -U freecodecamp bikes > bikes.sql
 // rebuild db
 psql -U postgres < bikes.sql
+
+querys:
+
+SELECT bike_id, type, size FROM bikes WHERE available=TRUE ORDER BY bike_id;
+-- actualiza todas los registros de bikes en la columna available a FALSE
+UPDATE bikes SET available=FALSE WHERE available=TRUE;
+-- actualiza todo a TRUE menos los de marca BMX  ----> se puede mejorar este resultado ojete!
+UPDATE bikes SET available=TRUE WHERE type='Road' OR type='Mountain';
+
+SELECT available FROM bikes WHERE available=TRUE;
+
+
+
+
+
+echo "$AVAILABLE_BIKES" | while read BIKE_ID BAR TYPE BAR SIZE
+do
+  echo "$BIKE_ID, $TYPE, $SIZE"
+done
+
+// comando para logearme
+psql --username=freecodecamp --dbname=bikes

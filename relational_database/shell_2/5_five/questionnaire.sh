@@ -12,3 +12,15 @@ QUESTION3="What's your favorite coding website?"
 echo $QUESTION3
 read WEBSITE
 echo -e "\nHello $NAME from $LOCATION. I learned that your favorite coding website is $WEBSITE!"
+
+case variable in
+    patrón1)
+        comandos1
+        ;;
+    patrón2)
+        comandos2
+        ;;
+    ...)
+        comandos_por_defecto
+        ;;
+esac
