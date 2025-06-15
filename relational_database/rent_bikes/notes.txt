@@ -60,5 +60,32 @@ do
   echo "$BIKE_ID, $TYPE, $SIZE"
 done
 
+insertar un nuevo usuario a la tabla usuarios
+INSERT INTO customers(phone, name) VALUES($var, $var);
+get el id del usuario utilizando el phone
+SELECT customer_id FROM customers WHERE phone='$';
+ingresar la renta a la db
+INSERT INTO rentals(customer_id, bike_id) VALUES($CUSTOMER_ID , $BIKE_ID_TO_RENT);
+actualizar available a false en la tabla bikes
+UPDATE bikes SET available=FALSE WHERE bike_id=$bike_id;
+get size y type  de la bike rentada
+SELECT size, type FROM bikes WHERE bike_id=$BIKE_ID_TO_RENT
+
+
+sed sintax para reemplasar caracteres
+sed s/<regex_pattern_to_replace>/<characters_to_replace_with>/<regex_flags>
+echo '28 | Mountain' | sed 's/ /=/g'
+28=|=Mountain
+echo '28 | Mountain' | sed 's/ |/"/'
+28" Mountain
+echo "$(echo ' M e ' | sed 's/ //g')."
+Me.
+echo "$(echo ' M e ' | sed 's/^ //g')."   -----> ^ solo el espacio en el principio
+M e .
+echo "$(echo '   M e ' | sed 's/^ *//g')." -----> * todos los de el principio "no solo 1 caracter"
+M e .
+echo "$(echo '   M e ' | sed 's/ $//g')." ---> $ es el contrario de ^, significa al final del texto
+echo "$(echo '   M e   ' | sed 's/ *$//g')."
+echo "$(echo '   M e   ' | sed -E 's/^ *| *$//g')." ---> | mas de un match de patron y -E
 // comando para logearme
 psql --username=freecodecamp --dbname=bikes

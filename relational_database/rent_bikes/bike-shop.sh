@@ -42,7 +42,7 @@ RENT_MENU() {
     echo -e "\nWhich one would you like to rent?"
     read BIKE_ID_TO_RENT
     # if input is not a number
-    if [[ ! $BIKE_ID_TO_RENT =~ ^[0-9]+$ ]]
+    if [[ ! $BIKE_ID_TO_RENT =~ ^[0-9]+$ ]] # comporovacion si envia un id type numero valido, por si ingresa un string o ataque x
     then
     # send to main menu
       MAIN_MENU "That is not a valid bike number."
@@ -69,10 +69,17 @@ RENT_MENU() {
         # insert new customer
           INSERT_CUSTOMER_RESULT=$($PSQL "INSERT INTO customers(phone, name) VALUES('$PHONE_NUMBER', '$CUSTOMER_NAME')")
           # get customer_id
+          CUSTOMER_ID=$($PSQL "SELECT customer_id FROM customers WHERE phone='$PHONE_NUMBER';")
           # insert bike rental
+          INSERT_RENTAL_RESULT=$($PSQL "INSERT INTO rentals(customer_id, bike_id) VALUES($CUSTOMER_ID , $BIKE_ID_TO_RENT)")
           # set bike availability to false
+          SET_TO_FALSE_RESULT=$($PSQL "UPDATE bikes SET available=FALSE WHERE bike_id=$BIKE_ID_TO_RENT")
           # get bike info
+          BIKE_INFO=$($PSQL "SELECT size, type FROM bikes WHERE bike_id=$BIKE_ID_TO_RENT")
+          #echo $BIKE_INFO | sed 's/ |/"/'
+          BIKE_INFO_FORMATTED=$(echo $BIKE_INFO | sed 's/ |/"/')
           # send to main menu
+          MAIN_MENU "I have put you down for the $BIKE_INFO_FORMATTED Bike, $(echo $CUSTOMER_NAME | sed -r 's/^ *| *$//g')."
         fi
       fi
     fi
