@@ -70,7 +70,22 @@ actualizar available a false en la tabla bikes
 UPDATE bikes SET available=FALSE WHERE bike_id=$bike_id;
 get size y type  de la bike rentada
 SELECT size, type FROM bikes WHERE bike_id=$BIKE_ID_TO_RENT
+join la tabla bikes y rentals utilizando USING no ON
+SELECT * FROM bikes LEFT JOIN rentals USING(bike_id);
+SELECT * FROM bikes INNER JOIN rentals USING(bike_id); ----> solo las available = f
+SELECT * FROM bikes INNER JOIN rentals USING(bike_id) INNER JOIN customers USING(customer_id);
+SELECT * FROM bikes INNER JOIN rentals USING(bike_id) INNER JOIN customers USING(customer_id) WHERE phone='555-5555' AND date_returned IS NULL;
+SELECT bike_id, type, size FROM bikes INNER JOIN rentals USING(bike_id) INNER JOIN customers USING(customer_id) WHERE phone='555-5555' AND date_returned IS NULL;
+SELECT bike_id, type, size FROM bikes INNER JOIN rentals USING(bike_id) INNER JOIN customers USING(customer_id) WHERE phone='555-5555' AND date_returned IS NULL ORDER BY bike_id;
 
+SELECT * FROM rentals INNER JOIN customers USING(customer_id);
+SELECT * FROM rentals INNER JOIN customers USING(customer_id) WHERE phone='555-5555' AND bike_id='1' AND date_returned IS NULL;
+SELECT rental_id FROM rentals INNER JOIN customers USING(customer_id) WHERE phone='555-5555' AND bike_id='1' AND date_returned IS NULL;
+
+// actualizar el registro a now() en la fecha de retorno de la bike
+UPDATE rentals SET date_returned = NOW() WHERE rental_id='$RENTAL_ID';
+// actualizar el registro de bikes a available=TRUE utilizando bike_id
+UPDATE bikes SET available=TRUE WHERE bike_id='$BIKE_ID';
 
 sed sintax para reemplasar caracteres
 sed s/<regex_pattern_to_replace>/<characters_to_replace_with>/<regex_flags>
