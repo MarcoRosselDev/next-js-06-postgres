@@ -1,0 +1,45 @@
+git status ---> principalmente vemos el nombre de la rama en la que estamos "main o master"
+
+# este comando no sirve para crear una nueva rama y movernos a ella
+git checkout -b new_branch
+# ejemplo de creacion y movimiento a una nueva rama nombreada main
+git checkout -b main
+output:
+Switched to a new branch 'main'
+
+git log ---> ver el historial de commits
+git diff ---> ver las diferencias de los archivos traqueados
+git branch ---> * main ----> me muestra la rama en la que estoy
+
+
+git branch feat/add-create-table-reference  ---> creamos una nueva rama feat clon de main
+git branch
+  feat/add-create-table-reference
+* main
+
+# seguimos en main, para cambiarnos a la nueva raiz aplicamos
+git checkout branch_name
+# en este caso
+git checkout feat/add-create-table-reference
+
+# para estar seguros aplicamos git branch denuevo para ver en que raiz estamos
+git branch
+* feat/add-create-table-reference
+  main
+
+git log --oneline ---> muestra el historial de commits pero solo en una linea
+
+# una vez cambiados a la rama main podemos realizar un merge (un traspaso de commits a la rama de interes)
+git merge nombre_rama
+# en nuestro caso seria:
+git merge feat/add-create-table-reference
+
+# podemos eliminar una rama ahora que la tenemos mergeada
+git branch -d branch_name ---> -d = delete
+git branch -d feat/add-create-table-reference 
+Deleted branch feat/add-create-table-reference (was 2252df4).
+
+# dentro de una rama hija con algun error solucionado aplicamos rebase
+git rebase main
+
+git stash

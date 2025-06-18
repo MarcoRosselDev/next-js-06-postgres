@@ -1,0 +1,7 @@
+nano filename --->
+nano es un comando para 
+control + o ----> para guardar y salir----> pide editar el nombre del archivo al salir, solo press enter si se quiere dejar asi
+control + x ---> exit nano
+bash filename ---> correr el archivo en terminal shell
+control + k ---> cortar texto del cursor.
+You can use control + k to "cut" and control + u to "uncut", or paste, a line.
