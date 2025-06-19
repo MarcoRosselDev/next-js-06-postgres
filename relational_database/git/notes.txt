@@ -42,4 +42,20 @@ Deleted branch feat/add-create-table-reference (was 2252df4).
 # dentro de una rama hija con algun error solucionado aplicamos rebase
 git rebase main
 
-git stash
+git stash --> crea una copia virtual momentanea para poder trabajar en otra rama
+git stash list --> para ver la lista de stash
+git stash pop --> restablece los elementos
+
+# como eliminar o correjir un commit
+git reset HEAD~1 ---> vuelve atras asta el comit en HEAD
+--hard ---> no se agregan los cambios
+--soft ---> se agregan y al staging tmbn
+
+# 2
+podemos revertir le commit en HEAD (el mas reciente)
+git revert HEAD
+
+git rebase --interactive --root 
+
+git rebase --interactive --root HEAD~2
+git rebase --interactive --root HEAD~2
