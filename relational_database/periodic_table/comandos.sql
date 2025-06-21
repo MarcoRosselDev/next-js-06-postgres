@@ -54,3 +54,47 @@ ALTER TABLE properties ADD FOREIGN KEY(atomic_number) REFERENCES elements(atomic
 /* You should create a types table that will store the three types of elements
 crear una tabla types con guarde los 3 tipos de elementos */
 CREATE TABLE types(type_id INT PRIMARY KEY, type VARCHAR(50) NOT NULL);
+/* You should add three rows to your types table whose values are the three different types from the properties table
+agregar 3 registros a la tabla types que son los 3 de la tabla properties */
+INSERT INTO types(type_id, type) VALUES(1, 'nonmetal'), (2, 'metal'), (3, 'metalloid');
+/* Your properties table should have a type_id foreign key column that references the type_id column from the types table. It should be an INT with the NOT NULL constraint .
+la tabla properties deve tenter una llave foranea en type_id con la tabla types.
+tabmien deve ser INT y NOT NULL
+*/
+ALTER TABLE properties ADD COLUMN type_id INT;
+UPDATE properties SET type_id='1' WHERE type='nonmetal';
+UPDATE properties SET type_id='2' WHERE type='metal';
+UPDATE properties SET type_id='3' WHERE type='metalloid';
+ALTER TABLE properties  alter column type_id set NOT NULL;
+ALTER TABLE properties ADD FOREIGN KEY(type_id) REFERENCES types(type_id);
+
+/* You should capitalize the first letter of all the symbol values in the elements table. Be careful to only capitalize the letter and not change any others 
+aplicar mayuscula a la primera letra de elements.symbol
+*/
+UPDATE elements SET symbol = INITCAP(symbol);
+
+/* You should remove all the trailing zeros after the decimals from each row of the atomic_mass column. You may need to adjust a data type to DECIMAL for this. The final values they should be are in the atomic_mass.txt file.
+ */
+
+ALTER TABLE properties ALTER COLUMN atomic_mass TYPE REAL;
+UPDATE properties SET atomic_mass='1.008' WHERE atomic_number='1';
+UPDATE properties SET atomic_mass='4.0026' WHERE atomic_number='2';
+UPDATE properties SET atomic_mass='6.94' WHERE atomic_number='3';
+UPDATE properties SET atomic_mass='9.0122' WHERE atomic_number='4';
+UPDATE properties SET atomic_mass='10.81' WHERE atomic_number='5';
+UPDATE properties SET atomic_mass='12.011' WHERE atomic_number='6';
+UPDATE properties SET atomic_mass='14.007' WHERE atomic_number='7';
+UPDATE properties SET atomic_mass='15.999' WHERE atomic_number='8';
+UPDATE properties SET atomic_mass='18.998' WHERE atomic_number='9';
+UPDATE properties SET atomic_mass='20.18' WHERE atomic_number='10';
+
+/* You should add the element with atomic number 9 to your database. Its name is Fluorine, symbol is F, mass is 18.998, melting point is -220, boiling point is -188.1, and it's a nonmetal 
+ingresar  atomic number 9
+*/
+INSERT INTO elements(atomic_number, symbol, name) VALUES(9, 'F', 'Fluorine');
+INSERT INTO properties(atomic_number, type, atomic_mass, melting_point_celsius, boiling_point_celsius, type_id) VALUES(9, 'nonmetal', 18.998, -220, -188.1, 1);
+
+/* You should add the element with atomic number 10 to your database. Its name is Neon, symbol is Ne, mass is 20.18, melting point is -248.6, boiling point is -246.1, and it's a nonmetal */
+INSERT INTO elements(atomic_number, symbol, name) VALUES(10, 'Ne', 'Neon');
+INSERT INTO properties(atomic_number, type, atomic_mass, melting_point_celsius, boiling_point_celsius, type_id) VALUES(10, 'nonmetal', 20.18, -248.6, -246.1, 1);
+/* psql -U postgres < periodic_table.sql */

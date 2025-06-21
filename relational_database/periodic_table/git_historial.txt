@@ -1,0 +1,6 @@
+You should create a periodic_table folder in the project folder and turn it into a git repository with git init
+> mkdir periodic_table
+> cd periodic_table/
+> git init
+
+Your repository should have a main branch with all your commits

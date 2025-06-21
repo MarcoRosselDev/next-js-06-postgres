@@ -14,10 +14,8 @@ if [[ $1 ]]
           echo "I could not find that element in the database."
         else
           # format mesaje
-          campo1=$(echo "$QUERY_STR" | awk '{print $1}')
-          campo2=$(echo "$QUERY_STR" | awk '{print $2}')
-          echo "Campo 1: $campo1"
-          echo "Campo 2: $campo2"
+
+          echo "$QUERY_STR"
         fi
     else
       QUERY_INT=$($PSQL "SELECT * FROM elements FULL JOIN properties USING(atomic_number) WHERE atomic_number='$1'")
