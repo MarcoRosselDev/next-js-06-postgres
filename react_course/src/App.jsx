@@ -1,33 +1,61 @@
+//import { useState } from 'react'
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 import './App.css'
+import Square from './components/Square'
+import calcular_ganador from './components/calcular_ganador.js'
+//import Button from './components/button'
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [square, setSquares] = useState([
+    null,null,null,
+    null,null,null,
+    null,null,null
+  ])
+  const [xIsNext, setXIsNext] = useState(true);
+  /* Para que los jugadores sepan cuándo termina el juego, puedes mostrar 
+  un texto como “Ganador: X” o “Ganador: O”. Para hacerlo, agrega una 
+  sección status al componente Board. El estado mostrará el ganador si el 
+  juego termina y si el juego está en curso, se mostrará el turno del 
+  siguiente jugador: */
+
+  function handleClick(i) {
+    // primero comprobamos que no tiene un valor no nullo para no sobreescribir
+    /* if (square[i]) {
+      return;
+    } */
+    if (square[i] || calcular_ganador(square)) {
+      return;
+    }
+
+    const nextSquares = square.slice();
+    /* if (xIsNext) {
+      nextSquares[i] = "X";
+    } else {
+      nextSquares[i] = "O";
+    } */
+    nextSquares[i] = xIsNext? "X" : "O";
+    
+    setSquares(nextSquares);
+    setXIsNext(!xIsNext);
+  }
 
   return (
     <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+      <div className="board-row">
+        <Square value={square[0]} setValue={() => handleClick(0)} />    
+        <Square value={square[1]} setValue={() => handleClick(1)} />    
+        <Square value={square[2]} setValue={() => handleClick(2)} />    
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
+      <div className="board-row">
+        <Square value={square[3]} setValue={() => handleClick(3)} />    
+        <Square value={square[4]} setValue={() => handleClick(4)} />    
+        <Square value={square[5]} setValue={() => handleClick(5)} />    
       </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      <div className="board-row">
+        <Square value={square[6]} setValue={() => handleClick(6)} />    
+        <Square value={square[7]} setValue={() => handleClick(7)} />    
+        <Square value={square[8]} setValue={() => handleClick(8)} />    
+      </div>
     </>
   )
 }
