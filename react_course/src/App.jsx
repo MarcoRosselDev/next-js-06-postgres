@@ -1,4 +1,3 @@
-//import { useState } from 'react'
 import { useState } from 'react'
 import './App.css'
 import Square from './components/Square'
@@ -18,21 +17,20 @@ function App() {
   juego termina y si el juego está en curso, se mostrará el turno del 
   siguiente jugador: */
 
+  const winner = calcular_ganador(square);
+  let status;
+  if (winner) {
+    status = "Ganador: " + winner;
+  } else {
+    status = "Siguiente jugador: " + (xIsNext ? "X" : "O");
+  }
+
   function handleClick(i) {
     // primero comprobamos que no tiene un valor no nullo para no sobreescribir
-    /* if (square[i]) {
-      return;
-    } */
     if (square[i] || calcular_ganador(square)) {
       return;
     }
-
     const nextSquares = square.slice();
-    /* if (xIsNext) {
-      nextSquares[i] = "X";
-    } else {
-      nextSquares[i] = "O";
-    } */
     nextSquares[i] = xIsNext? "X" : "O";
     
     setSquares(nextSquares);
@@ -41,6 +39,7 @@ function App() {
 
   return (
     <>
+      <div>{status}</div>
       <div className="board-row">
         <Square value={square[0]} setValue={() => handleClick(0)} />    
         <Square value={square[1]} setValue={() => handleClick(1)} />    
