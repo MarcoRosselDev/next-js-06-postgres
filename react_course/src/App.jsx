@@ -2,6 +2,10 @@ import { useState } from 'react'
 import './App.css'
 import Square from './components/Square'
 import calcular_ganador from './components/calcular_ganador.js'
+import TestStateScope from './test_component/TestStateScope.js'
+//import TestState from './test_component/TestState.js'
+//import TestArray from './test_component/TestArray.js'
+//import TestComponent from './test_component/TestComponent.js'
 //import Button from './components/button'
 
 function App() {
@@ -55,6 +59,15 @@ function App() {
         <Square value={square[7]} setValue={() => handleClick(7)} />    
         <Square value={square[8]} setValue={() => handleClick(8)} />    
       </div>
+      {/* <TestComponent /> */}
+      
+      {/* <TestArray /> */}
+
+      {/* <TestState />
+      <TestState />
+      <TestState /> */}
+      
+      <TestStateScope />
     </>
   )
 }
