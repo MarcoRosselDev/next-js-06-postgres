@@ -4,7 +4,7 @@ import Test from "./Test";
 function Saludar() {
   const [message, setMessage] = useState("");
   function handleSubmit(nombre:string) {
-    setMessage(Test({nombre}))
+    //setMessage(Test({nombre}))
   }
   function handleChange() {
     console.log();
