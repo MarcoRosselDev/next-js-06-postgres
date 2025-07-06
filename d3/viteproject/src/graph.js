@@ -1,11 +1,5 @@
 import * as d3 from 'd3'
 
-export default function nameTest() {
-  console.log('test');
-}
-
-document.addEventListener('DOMContentLoaded', () => {
-
 const data = [
   {letter: "A", frequency: 0.08167},
   {letter: "B", frequency: 0.01492},
@@ -28,6 +22,8 @@ const data = [
   {letter: "S", frequency: 0.06327},
   {letter: "T", frequency: 0.09056}
 ]
+
+export function graphTest(element) {
 
 // Specify the chart’s dimensions.
 const width = 928;
@@ -57,7 +53,7 @@ const svg = d3.create("svg")
       .attr("width", width)
     .attr("height", height)
     .attr("style", "max-width: 100%; height: auto;")
-    .call(zoom);
+    //.call(zoom);
 
 // Append the bars.
 svg.append("g")
@@ -83,9 +79,15 @@ svg.append("g")
     .call(d3.axisLeft(y))
     .call(g => g.select(".domain").remove());
 
+  element.append(svg.node())
+}
+
+//document.addEventListener('DOMContentLoaded', () => {
+
+
 //return svg.node();
 
-function zoom(svg) {
+/* function zoom(svg) {
   const extent = [[marginLeft, marginTop], [width - marginRight, height - marginTop]];
 
   svg.call(d3.zoom()
@@ -99,7 +101,7 @@ function zoom(svg) {
     svg.selectAll(".bars rect").attr("x", d => x(d.letter)).attr("width", x.bandwidth());
     svg.selectAll(".x-axis").call(xAxis);
   }
-}
+} */
 
-  document.getElementById('graph').append(svg.node())
-})
+  //document.getElementById('graph').append(svg.node())
+//})
