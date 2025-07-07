@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Transicion</title>
+  <style>
+    rect{
+      stroke: navy;
+      stroke-width: 5px;
+      fill: orangered;
+      transition: all 3000ms;
+    }
+    rect:hover{
+      stroke: orangered;
+      fill: navy;
+      stroke-width: 20px;
+    }
+    * {
+      padding: 0;
+      margin: 0 auto;
+      box-sizing: border-box;
+    }
+    svg{
+      position: fixed;
+      width: 100%;
+      height: 100vh;
+      border: 2px solid navy;
+    }
+  </style>
+</head>
+<body>
+  <p>pasar el mouse sobre el rectangulo</p>
+  <svg>
+    <rect
+      x="250"
+      y="100"
+      height="200"
+      width="400"
+    ></rect> 
+  </svg>
+</body>
+</html>
