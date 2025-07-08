@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>vanilla javascript to create svg</title>
+  <style>
+    * {
+      padding: 0;
+      margin: 0 auto;
+      box-sizing: border-box;
+    }
+    svg{
+      position:absolute;
+    }
+  </style>
+</head>
+<body>
+  <script>
+    const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+    svg.setAttribute('width', window.innerWidth)
+    svg.setAttribute('height', window.innerHeight)
+
+    
+    for (let i = 0; i < 200; i++) {
+      const rect = document.createElementNS("http://www.w3.org/2000/svg", "rect");
+      rect.setAttribute("width", 5)
+      rect.setAttribute("height", window.innerHeight)
+      rect.setAttribute("x", i * 10)
+      svg.append(rect)      
+    }
+
+    const circle = document.createElementNS("http://www.w3.org/2000/svg","circle")
+    circle.setAttribute('cx', window.innerWidth / 2)
+    circle.setAttribute('cy', window.innerHeight / 2)
+    circle.setAttribute('r', 150)
+    svg.append(circle)
+    svg.append(circle)
+
+    document.body.append(svg)
+  </script>
+</body>
+</html>
