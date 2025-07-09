@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mask svg</title>
+  <style>
+    * {
+      padding: 0;
+      margin: 0 auto;
+      box-sizing: border-box;
+    }
+    svg{
+      position: absolute;
+    }
+  </style>
+</head>
+<body>
+  <script>
+    // ancho lineas negras
+    const ancho_lineas = 20
+    // svg
+    const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+    svg.setAttribute("width", window.innerWidth);
+    svg.setAttribute("height", window.innerHeight);
+
+    const rect = document.createElementNS("http://www.w3.org/2000/svg", "rect");
+    rect.setAttribute("width", window.innerWidth);
+    rect.setAttribute("height", window.innerHeight);
+    //rect.setAttribute("mask", "url(#circle-id)");
+    rect.setAttribute("fill", "black");
+    svg.append(rect)
+
+    const rect2 = document.createElementNS("http://www.w3.org/2000/svg", "rect");
+    rect2.setAttribute("width", window.innerWidth);
+    rect2.setAttribute("height", window.innerHeight);
+    rect2.setAttribute("mask", "url(#mask-id)");
+    rect2.setAttribute("fill", "black");
+    svg.append(rect2)
+
+    const mask = document.createElementNS("http://www.w3.org/2000/svg", "mask");
+    mask.setAttribute("id", "mask-id");
+    mask.setAttribute("mark-type", "luminance");
+
+    const circleMask = document.createElementNS("http://www.w3.org/2000/svg", "mask");
+    mask.setAttribute("id", "circle-id");
+    mask.setAttribute("mark-type", "luminance");
+
+
+    const c = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+    c.setAttribute("cx", window.innerWidth / 2)
+    c.setAttribute("cy", window.innerHeight / 2)
+    c.setAttribute("r", 300)
+    c.setAttribute("fill", "white")
+    c.setAttribute("mask", "url(#circle-id)")
+
+    svg.append(c)
+
+    for (let i = 0; i < 40; i++) {
+      const rectY = document.createElementNS("http://www.w3.org/2000/svg", "rect");
+      rectY.setAttribute("width", window.innerWidth);
+      rectY.setAttribute("height", ancho_lineas);
+      rectY.setAttribute("fill", "white");
+      rectY.setAttribute("mask", "url(#mask-id)")
+      rectY.setAttribute("y", i * (ancho_lineas * 2));
+
+      const rectX = document.createElementNS("http://www.w3.org/2000/svg", "rect");
+      rectX.setAttribute("width", ancho_lineas);
+      rectX.setAttribute("height", window.innerHeight);
+      rectX.setAttribute("fill", "white");
+      rectX.setAttribute("mask", "url(#circle-id)")
+      rectX.setAttribute("x", i * (ancho_lineas * 2));
+      
+      mask.append(rectY)
+      svg.append(rectX)
+    }
+
+    svg.append(mask)
+    svg.append(circleMask)
+
+    document.body.append(svg)
+  </script>
+</body>
+</html>

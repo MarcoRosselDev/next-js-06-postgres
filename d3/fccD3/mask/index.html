@@ -19,55 +19,73 @@
   <script>
     // ancho lineas negras
     const ancho_lineas = 20
+    const w = window.innerWidth;
+    const h = window.innerHeight;
     // svg
     const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
     svg.setAttribute("width", window.innerWidth);
     svg.setAttribute("height", window.innerHeight);
-    
-    // mask antes de todo
-    const mask = document.createElementNS("http://www.w3.org/2000/svg", "mask");
-    mask.setAttribute("id", "mask-id");
-    mask.setAttribute("mark-type", "luminance");
-    
-    // for 
-    for (let i = 0; i < 50; i++) {
-      const rect = document.createElementNS("http://www.w3.org/2000/svg", "rect");
-      rect.setAttribute("height", window.innerWidth);
-      rect.setAttribute("width", ancho_lineas)
-      rect.setAttribute("x", i * (ancho_lineas * 2))
-      //rect.setAttribute("mask", "url(#mask-id)")
-      svg.append(rect);
-    }
-    const circle2 = document.createElementNS("http://www.w3.org/2000/svg", "circle");
-    circle2.setAttribute("cx", window.innerWidth / 2)
-    circle2.setAttribute("cy", window.innerHeight / 2)
-    circle2.setAttribute("r", 300)
-    circle2.setAttribute("fill", "black")
-    //circle2.setAttribute("mask", "url(#mask-id)")
-    //svg.append(circle2)
-    
 
-    // rect
-    // add circle with transparencia if fill is black
-    const circle = document.createElementNS("http://www.w3.org/2000/svg", "circle");
-    circle.setAttribute("cx", window.innerWidth / 2)
-    circle.setAttribute("cy", window.innerHeight / 2)
-    circle.setAttribute("r", 300)
-    circle.setAttribute("fill", "white")
-    circle.setAttribute("mask", "url(#mask-id)")
-    mask.append(circle)
-    //<circle cx="50" cy="50" r="50" fill="purple" mask="url(#myMask)" />
+    const mask1 = document.createElementNS("http://www.w3.org/2000/svg", "mask");
+    mask1.setAttribute("id", "mask1");
+    mask1.setAttribute("mark-type", "luminance");
+
+    const mask2 = document.createElementNS("http://www.w3.org/2000/svg", "mask");
+    mask1.setAttribute("id", "mask2");
+    mask1.setAttribute("mark-type", "luminance");
+
 
     for (let i = 0; i < 40; i++) {
       const rectY = document.createElementNS("http://www.w3.org/2000/svg", "rect");
-      rectY.setAttribute("width", window.innerWidth);
+      rectY.setAttribute("width", w);
       rectY.setAttribute("height", ancho_lineas);
       rectY.setAttribute("y", i * (ancho_lineas * 2));
-      svg.append(rectY)
+      rectY.setAttribute("fill", "white");
+      rectY.setAttribute("mask", "url(#mask2)");
+      mask2.append(rectY)
     }
+    for (let i = 0; i < 40; i++) {
+      const rectX = document.createElementNS("http://www.w3.org/2000/svg", "rect");
+      rectX.setAttribute("width", ancho_lineas);
+      rectX.setAttribute("height", h);
+      rectX.setAttribute("x", i * (ancho_lineas * 2));
+      rectX.setAttribute("fill", "white");
+      rectX.setAttribute("mask", "url(#mask1)");
+      mask1.append(rectX)
+    }
+
+    const rectBlack = document.createElementNS("http://www.w3.org/2000/svg", "rect");
+    rectBlack.setAttribute("width", w);
+    rectBlack.setAttribute("height", h);
+    rectBlack.setAttribute("mask", "url(#mask1)");
+    rectBlack.setAttribute("fill","black");
+    svg.append(rectBlack)
     
-    svg.appendChild(mask)
-    // add node svg to the body element
+    const rectBlack2 = document.createElementNS("http://www.w3.org/2000/svg", "rect");
+    rectBlack2.setAttribute("width", w);
+    rectBlack2.setAttribute("height", h);
+    rectBlack2.setAttribute("mask", "url(#mask2)");
+    rectBlack2.setAttribute("fill","white");
+    svg.append(rectBlack2)
+
+    const c = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+    c.setAttribute("r", 200);
+    c.setAttribute("cx", w / 2);
+    c.setAttribute("cy", h / 2);
+    c.setAttribute("fill","black");
+    c.setAttribute("mask", "url(#mask1)");
+    svg.append(c)
+    
+    const c2 = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+    c2.setAttribute("r", 200);
+    c2.setAttribute("cx", w / 2);
+    c2.setAttribute("cy", h / 2);
+    c2.setAttribute("fill","white");
+    c2.setAttribute("mask", "url(#mask1)");
+    svg.append(c2)
+
+    svg.append(mask1)
+    svg.append(mask2)
     document.body.append(svg)
   </script>
 </body>
