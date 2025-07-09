@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mask svg</title>
+  <style>
+    * {
+      padding: 0;
+      margin: 0 auto;
+      box-sizing: border-box;
+    }
+    svg{
+      position: absolute;
+    }
+  </style>
+</head>
+<body>
+  <script>
+    // ancho lineas negras
+    const ancho_lineas = 20
+    // svg
+    const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+    svg.setAttribute("width", window.innerWidth);
+    svg.setAttribute("height", window.innerHeight);
+    
+    // mask antes de todo
+    const mask = document.createElementNS("http://www.w3.org/2000/svg", "mask");
+    mask.setAttribute("id", "mask-id");
+    mask.setAttribute("mark-type", "luminance");
+    
+    // for 
+    for (let i = 0; i < 50; i++) {
+      const rect = document.createElementNS("http://www.w3.org/2000/svg", "rect");
+      rect.setAttribute("height", window.innerWidth);
+      rect.setAttribute("width", ancho_lineas)
+      rect.setAttribute("x", i * (ancho_lineas * 2))
+      //rect.setAttribute("mask", "url(#mask-id)")
+      svg.append(rect);
+    }
+    const circle2 = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+    circle2.setAttribute("cx", window.innerWidth / 2)
+    circle2.setAttribute("cy", window.innerHeight / 2)
+    circle2.setAttribute("r", 300)
+    circle2.setAttribute("fill", "black")
+    //circle2.setAttribute("mask", "url(#mask-id)")
+    //svg.append(circle2)
+    
+
+    // rect
+    // add circle with transparencia if fill is black
+    const circle = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+    circle.setAttribute("cx", window.innerWidth / 2)
+    circle.setAttribute("cy", window.innerHeight / 2)
+    circle.setAttribute("r", 300)
+    circle.setAttribute("fill", "white")
+    circle.setAttribute("mask", "url(#mask-id)")
+    mask.append(circle)
+    //<circle cx="50" cy="50" r="50" fill="purple" mask="url(#myMask)" />
+
+    for (let i = 0; i < 40; i++) {
+      const rectY = document.createElementNS("http://www.w3.org/2000/svg", "rect");
+      rectY.setAttribute("width", window.innerWidth);
+      rectY.setAttribute("height", ancho_lineas);
+      rectY.setAttribute("y", i * (ancho_lineas * 2));
+      svg.append(rectY)
+    }
+    
+    svg.appendChild(mask)
+    // add node svg to the body element
+    document.body.append(svg)
+  </script>
+</body>
+</html>
