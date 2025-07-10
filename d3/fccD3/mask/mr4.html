@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mask svg</title>
+  <style>
+    * {
+      padding: 0;
+      margin: 0 auto;
+      box-sizing: border-box;
+    }
+    svg{
+      position: absolute;
+      border: 2px solid navy;
+    }
+  </style>
+</head>
+<body>
+  <svg width="900" height="500">
+
+    <mask id="mask1" mask-type="luminance">
+      <rect width="900" height="20" y="250" fill="white" />
+      <rect width="900" height="20" y="290" fill="white" />
+      <rect width="900" height="20" y="210" fill="white" />
+    </mask>
+    <mask id="mask2" mask-type="luminance">
+      <rect width="20" height="500" x="410" fill="white"/>
+      <rect width="20" height="500" x="450" fill="white"/>
+      <rect width="20" height="500" x="490" fill="white"/>
+      <circle
+        cx="450"
+        cy="250"
+        r="150"
+        fill="black"
+        mask="url(#mask2)"
+      ></circle>
+    </mask>
+
+    <rect width="900" height="500" fill="navy" mask="url(#mask2)"/>
+    <circle
+      cx="450"
+      cy="250"
+      r="150"
+      fill="navy"
+      mask="url(#mask1)"
+    ></circle>
+  </svg>
+</body>
+</html>
