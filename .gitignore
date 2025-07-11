@@ -9,6 +9,7 @@
 !.yarn/plugins
 !.yarn/releases
 !.yarn/versions
+/d3/fccD3/mask/node_modules
 
 # testing
 /coverage
