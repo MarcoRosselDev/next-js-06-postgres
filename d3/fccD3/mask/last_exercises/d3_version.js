@@ -1,5 +1,5 @@
-import {select} from "./node_modules/d3-selection/src/index.js";
-import range from "./node_modules/d3-array/src/range.js";
+import {select} from "d3-selection";
+import range from "../node_modules/d3-array/src/range.js";
 
 
 const h = window.innerHeight; // heigth o altura
@@ -35,6 +35,9 @@ maskA.selectAll("rect.A")
   .attr("fill", "white")
   .attr("class", "A")
 
+// .join = .enter().append("rect") para el caso particular de
+// si no existe la data en el DOM
+// es la vercion corta .join("rect")
 maskB.selectAll("rect.B")
   .data(range(28))
   .join("rect")
