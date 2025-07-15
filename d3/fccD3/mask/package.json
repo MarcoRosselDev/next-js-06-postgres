@@ -1,1 +1,20 @@
-{"name":"mask","version":"1.0.0","description":"fcc d3 project","keywords":["d3"],"license":"ISC","author":"marco rossel","type":"commonjs","main":"app.js","scripts":{"test":"echo \"Error: no test specified\" && exit 1"},"dependencies":{"d3":"^7.9.0"}}
+{
+  "name": "mask",
+  "version": "1.0.0",
+  "description": "fcc d3 project",
+  "keywords": [
+    "d3"
+  ],
+  "license": "ISC",
+  "author": "marco rossel",
+  "type": "commonjs",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "vite"
+  },
+  "dependencies": {
+    "d3": "^7.9.0",
+    "vite": "^7.0.4"
+  }
+}

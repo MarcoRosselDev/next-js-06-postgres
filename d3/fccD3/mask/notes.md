@@ -1,0 +1,4 @@
+## reduce
+```javascript
+arr.reduce()
+```

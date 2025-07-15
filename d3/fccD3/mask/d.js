@@ -14,3 +14,5 @@ const d = [2,4,5,7,3,2,1,5,6,1,11,2,4,20]
 
 d.sort((a, b) => a - b)
 // b - a -----> orden alreves
+
+export default d
